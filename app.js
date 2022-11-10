@@ -37,7 +37,6 @@ const prettyPrint = (node, prefix = '', isLeft = true) => {
   }
 }
 const root = buildTree(sortedArr,0,sortedArr.length-1)
-console.log(root)
 
 function traverse(value,root){
   if(root.data == value){
@@ -52,12 +51,22 @@ function traverse(value,root){
 }
 
 function insert(value,root){
-  if(value < root.data){
-    root.left =insert(root.left,value);
-  }else if(value > root.value){
-    root.right =insert(root.right,value);
+    if(root == null){
+    console.log('is null')
+    root = new Node(value)
+    return root 
   }
+  if(value < root.data){
+    root.left = insert(value,root.left)
+  } 
+  if(value > root.data){
+    console.log(`value is greater than ${root.data} from ${root}`)
+    root.right= insert(value,root.right)
+  }
+  console.log(root)
+  // returns the whole root
   return root
 }
+console.log(prettyPrint(root))
 console.log(insert(6,root))
 console.log(prettyPrint(root))
